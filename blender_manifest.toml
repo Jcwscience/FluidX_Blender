@@ -1,0 +1,15 @@
+schema_version = "1.0.0"
+
+id = "fluidx_blender"
+version = "0.1.0"
+name = "FluidX_Blender"
+tagline = "Generate FluidX3D simulation setups and import results into Blender"
+maintainer = "FluidX_Blender contributors <https://github.com/Jcwscience/FluidX_Blender>"
+type = "add-on"
+
+blender_version_min = "4.2.0"
+
+license = ["SPDX:MIT"]
+
+[tags]
+category = "Simulation"
