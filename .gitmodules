@@ -1,0 +1,3 @@
+[submodule "FluidX3D"]
+	path = FluidX3D
+	url = https://github.com/ProjectPhysX/FluidX3D.git
