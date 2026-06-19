@@ -40,9 +40,9 @@ git submodule update --init --recursive
 2. Zip the `FluidX_Blender` directory into `FluidX_Blender.zip`.
 3. In Blender 4.2+, open **Edit → Preferences → Get Extensions** (top-right drop-down **▾**) → **Install from Disk …**
 4. Select the `FluidX_Blender.zip` file and click **Install Extension**.
-5. The addon activates automatically and the **FluidX** tab appears in the 3-D Viewport sidebar (`N` key).
+5. The add-on activates automatically and the **FluidX** tab appears in the 3-D Viewport sidebar (`N` key).
 
-> **Blender 4.0 / 4.1 (legacy):** Use **Edit → Preferences → Add-ons → Install …**, select the zip, then enable the add-on by ticking the checkbox next to **Simulation: FluidX_Blender**.
+> **Blender 4.0 / 4.1 (legacy):** Zip the `FluidX_Blender` directory, then use **Edit → Preferences → Add-ons → Install …**, select the zip, and enable the add-on by ticking the checkbox next to **Simulation: FluidX_Blender**.
 
 ## Quick-Start Bake Workflow
 
