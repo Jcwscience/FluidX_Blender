@@ -189,7 +189,11 @@ _classes = (FluidXProperties,)
 def register():
     for cls in _classes:
         bpy.utils.register_class(cls)
-    bpy.types.Scene.fluidx = bpy.props.PointerProperty(type=FluidXProperties)
+    bpy.types.Scene.fluidx = bpy.props.PointerProperty(
+        type=FluidXProperties,
+        # All FluidX_Blender addon settings live here, accessible as
+        # context.scene.fluidx throughout the addon.
+    )
 
 
 def unregister():

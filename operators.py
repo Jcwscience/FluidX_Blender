@@ -80,6 +80,9 @@ class FLUIDX_OT_run_simulation(Operator):
                     check=True,
                     capture_output=True,
                     text=True,
+                    # 10-minute timeout; large GPU projects may need more time
+                    # depending on hardware.  Increase if your build routinely
+                    # exceeds this limit.
                     timeout=600,
                 )
                 log.info("make stdout: %s", result.stdout)

@@ -278,7 +278,7 @@ def load_vtk_as_mesh(context, filepath: str, frame: Optional[int] = None):
     Returns the created *bpy.types.Object* or *None* on failure.
     """
     import bpy
-    import bmesh as bm_module
+    import bmesh
 
     try:
         vtk = VTKFile(filepath)
@@ -298,7 +298,7 @@ def load_vtk_as_mesh(context, filepath: str, frame: Optional[int] = None):
     obj = bpy.data.objects.new(name, mesh)
     context.collection.objects.link(obj)
 
-    bm = bm_module.new()
+    bm = bmesh.new()
     verts = [bm.verts.new(pt) for pt in vtk.points]
     bm.verts.ensure_lookup_table()
 
@@ -379,7 +379,7 @@ def load_frame_sequence(context, directory: str, file_format: str, start_frame: 
         obj.keyframe_insert(data_path="hide_viewport", frame=frame_num)
         obj.keyframe_insert(data_path="hide_render", frame=frame_num)
 
-        if frame_num + 1 <= start_frame + len(files):
+        if idx + 1 < len(files):
             obj.hide_viewport = True
             obj.hide_render = True
             obj.keyframe_insert(data_path="hide_viewport", frame=frame_num + 1)
