@@ -22,7 +22,7 @@ git submodule update --init --recursive
 
 ## Requirements
 
-* Blender **4.0** or newer (with OpenVDB support for volume rendering)
+* Blender **4.2** or newer (with OpenVDB support for volume rendering)
 * A C++ build environment with `make` and an OpenCL SDK on the build machine
   (only required when using the **Build Before Run** option)
 * FluidX3D submodule initialised (`git submodule update --init`)
@@ -37,9 +37,12 @@ git submodule update --init --recursive
    ```bash
    git submodule update --init --recursive
    ```
-2. In Blender, open **Edit → Preferences → Add-ons → Install …**
-3. Select the `FluidX_Blender` directory (or a `.zip` of it) and click **Install Add-on**.
-4. Enable the add-on by ticking the checkbox next to **Simulation: FluidX_Blender**.
+2. Zip the `FluidX_Blender` directory into `FluidX_Blender.zip`.
+3. In Blender 4.2+, open **Edit → Preferences → Get Extensions** (top-right drop-down **▾**) → **Install from Disk …**
+4. Select the `FluidX_Blender.zip` file and click **Install Extension**.
+5. The addon activates automatically and the **FluidX** tab appears in the 3-D Viewport sidebar (`N` key).
+
+> **Blender 4.0 / 4.1 (legacy):** Use **Edit → Preferences → Add-ons → Install …**, select the zip, then enable the add-on by ticking the checkbox next to **Simulation: FluidX_Blender**.
 
 ## Quick-Start Bake Workflow
 
