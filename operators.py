@@ -98,8 +98,14 @@ def _poll_bake_process() -> float | None:
             fx.bake_stats = stats
 
     if ret_code is not None:
-        # Process has ended
+        # Process has ended — flush and close the log file now
         _bake_state["process"] = None
+        log_file_handle = _bake_state.pop("log_file", None)
+        if log_file_handle is not None:
+            try:
+                log_file_handle.close()
+            except OSError:
+                pass
 
         vdb_dir = _bake_state.get("vdb_dir") or ""
         if ret_code == 0 and vtk_dir:
@@ -299,7 +305,7 @@ class FLUIDX_OT_bake(Operator):
             return {"CANCELLED"}
 
         # --- Launch simulation ----------------------------------------------
-        log_file = open(log_path, "w", encoding="utf-8")
+        log_file = open(log_path, "w", encoding="utf-8")  # noqa: WPS515
         try:
             proc = subprocess.Popen(
                 [exe],
@@ -313,6 +319,10 @@ class FLUIDX_OT_bake(Operator):
             return {"CANCELLED"}
 
         # --- Store state and start polling timer ---------------------------
+        # log_file is kept open intentionally so the subprocess can write to it;
+        # it is closed by _poll_bake_process() when the process exits or by
+        # FLUIDX_OT_cancel_bake if the user cancels early.
+        _bake_state["log_file"]     = log_file
         _bake_state["process"]      = proc
         _bake_state["log_path"]     = log_path
         _bake_state["vtk_dir"]      = vtk_dir
@@ -369,6 +379,12 @@ class FLUIDX_OT_cancel_bake(Operator):
             proc.kill()
 
         _bake_state["process"] = None
+        log_file_handle = _bake_state.pop("log_file", None)
+        if log_file_handle is not None:
+            try:
+                log_file_handle.close()
+            except OSError:
+                pass
         props = context.scene.fluidx
         props.is_baking    = False
         props.bake_stats   = "Bake cancelled by user."
